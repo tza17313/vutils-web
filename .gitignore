@@ -1,0 +1,18 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# idea setting
+.idea
+
+# dependencies
+/node_modules
+
+
+# misc
+.DS_Store
+
+
+*.log
+
+# vim
+*.swp
+package-lock.json
