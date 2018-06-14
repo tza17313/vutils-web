@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "baie-vutils": "latest",
+    "baie-vutils": "^1.0.2",
     "js-cookie": "^2.2.0",
     "qs": "^6.5.2",
     "react-native-web": "^0.8.3"

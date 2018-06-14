@@ -101,3 +101,48 @@ export function R_confirm(config) {
         }
     })
 }
+
+/**
+ * 图片根据显示的大小尽可能的小
+ * @param url - 原图片地址
+ * @param width - 图片所占的宽
+ * @param height - 图片所占的高
+ * @returns {*}
+ */
+export function imgCompress(url, width, height, fixedPixel) {
+    if (!width || !height) {
+        return url
+    }
+    let src = url
+    let pixel = PixelRatio.get()
+    if (fixedPixel) {
+        pixel = fixedPixel
+    }
+    width = parseInt(width * pixel, 10)
+    height = parseInt(height * pixel, 10)
+    
+    //太大的数字，阿里云不支持，而且也裁剪压缩的意义了
+    if (width > 1500 || height > 1500) {
+        return src
+    }
+    try {
+        let isAliImg = src.match(/static\.rosepie\.com/) !== null || src.match(/static\.meiguipai\.net/) !== null
+        if (src.match('x-oss-process') !== null) {
+            return src
+        }
+        if (isAliImg) {
+            src = src.replace(/@.*/, "")
+            if (src.match(/\?/) !== null) {
+                src += '&'
+            } else {
+                src += '?'
+            }
+            src += `x-oss-process=image/resize,m_fill,h_${height},w_${width}` //缩略图
+        }
+        
+    } catch (e) {
+    
+    }
+    
+    return src
+}
